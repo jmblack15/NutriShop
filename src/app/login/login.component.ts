@@ -20,6 +20,7 @@ export class LoginComponent {
   constructor(private cookieService: CookiesService) { }
 
   @Output() loginChanged = new EventEmitter<boolean>();
+
   isLoginError = false
 
   adminInfo = {
