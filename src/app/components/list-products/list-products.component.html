@@ -1,0 +1,11 @@
+@if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
+  <a [routerLink]="['adminProduct']" class="mx-auto mt-5 w-56 h-10 bg-slate-700 rounded-md text-white flex items-center justify-center">Agregar Nuevo Producto</a>
+}
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center my-5">
+    @for (product of products; track $index) {
+      <app-card-product
+        [infoProduct]="product"
+      />
+    }
+   </section>

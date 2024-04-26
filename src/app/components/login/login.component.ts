@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CookiesService } from '../Services/cookies.service';
+import { CookiesService } from '../../Services/cookies.service';
 import {
   ReactiveFormsModule,
   FormControl,
