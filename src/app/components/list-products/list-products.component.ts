@@ -17,7 +17,9 @@ import { RouterModule } from '@angular/router';
 export class ListProductsComponent {
 
   modalOpen: boolean = false
-  tokenLongin: string | null = null;
+  isAlertOpen: boolean = false
+  tokenLongin: string | null = null
+  idProduct: number | null = null
 
   constructor(private cookieService: CookiesService) { }
 
@@ -67,4 +69,20 @@ export class ListProductsComponent {
     console.log(this.products)
     this.closeModal()
   }
+
+  deleteProduct() {
+    const indexProduct = this.products.findIndex(product => product.id === this.idProduct)
+    this.products.splice(indexProduct, 1)
+    this.toggleAlert()
+  }
+
+  toggleAlert() {
+    this.isAlertOpen = !this.isAlertOpen
+  }
+
+  openAlert(idProduct: number) {
+    this.idProduct = idProduct
+    this.toggleAlert()
+  }
+
 }

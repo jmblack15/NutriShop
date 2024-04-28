@@ -6,7 +6,25 @@
   @for (product of products; track $index) {
     <app-card-product
       [infoProduct]="product"
+      (deleteProductEvent)="openAlert($event)"
     />
+  }
+
+  @if(isAlertOpen){
+    <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col justify-center items-center">
+      <div class="container
+      w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
+       border-2 rounded-md border-gray-500 justify-around bg-slate-200
+       shadow-lg p-5">
+        <img class="w-10" src="/assets/icons/warning.png" alt="warming">
+        <h3 class="text-lg font-semibold	">¿está seguro?</h3>
+        <p class="text-center">Una vez eliminado, no podrás recuperar este elemento.</p>
+        <div class="flex gap-5 mt-5">
+          <div (click)="deleteProduct()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Eliminar</div>
+          <div (click)="toggleAlert()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Cancelar</div>
+        </div>
+      </div>
+    </div>
   }
 
   @if(modalOpen){
