@@ -16,9 +16,10 @@ import {
 export class ManageProductComponent {
 
   @Input() isOpenModal: boolean = false
+  @Input() idProduct: number | null = null
   @Output() closeModalEvent = new EventEmitter();
   @Output() addProductEvent = new EventEmitter();
-
+  @Output() updateProductEvent = new EventEmitter();
 
 
   productForm = new FormGroup({
@@ -32,10 +33,17 @@ export class ManageProductComponent {
     this.closeModalEvent.emit()
   }
 
-  addProduct() {
-    if (this.productForm.valid) {
-      const newProduct = this.productForm.value
-      this.addProductEvent.emit(newProduct)
+  handleProduct() {
+    if (this.idProduct) {
+      if (this.productForm.valid) {
+        const newProduct = this.productForm.value
+        this.updateProductEvent.emit(newProduct)
+      }
+    } else {
+      if (this.productForm.valid) {
+        const newProduct = this.productForm.value
+        this.addProductEvent.emit(newProduct)
+      }
     }
   }
 }

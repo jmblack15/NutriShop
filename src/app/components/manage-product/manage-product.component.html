@@ -1,7 +1,7 @@
 <form class="container
 w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
  border-2 rounded-md border-gray-500 justify-around bg-slate-200
- shadow-lg p-5 relative" [formGroup]="productForm" (ngSubmit)="addProduct()">
+ shadow-lg p-5 relative" [formGroup]="productForm" (ngSubmit)="handleProduct()">
  <button (click)="closeModal()" type="button" class="bg-red-700 text-white absolute w-7 h-7 rounded-full top-0 right-0">X</button>
   <div class="flex flex-col justify-center items-center gap-2">
     <label for="name">Nombre</label>

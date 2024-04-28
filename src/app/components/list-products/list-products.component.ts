@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CardProductComponent } from '../card-product/card-product.component';
 import { ManageProductComponent } from '../manage-product/manage-product.component';
 import { ProductInterface } from '../../models/product.model'
 import { CookiesService } from '../../Services/cookies.service';
@@ -10,7 +9,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [CardProductComponent, RouterModule, ManageProductComponent],
+  imports: [RouterModule, ManageProductComponent],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
@@ -51,12 +50,8 @@ export class ListProductsComponent {
     },
   ]
 
-  closeModal() {
-    this.modalOpen = false;
-  }
-
-  openModal() {
-    this.modalOpen = true
+  toggleModal() {
+    this.modalOpen = !this.modalOpen
   }
 
   addProduct(newProduct: ProductInterface) {
@@ -66,8 +61,7 @@ export class ListProductsComponent {
       ...newProduct
     }
     this.products.push(formatedObject);
-    console.log(this.products)
-    this.closeModal()
+    this.toggleModal()
   }
 
   deleteProduct() {
@@ -76,8 +70,29 @@ export class ListProductsComponent {
     this.toggleAlert()
   }
 
+  updateProduct(updateProduct: ProductInterface) {
+
+    const indexProduct = this.products.findIndex(product => product.id == this.idProduct)
+    let updatedProduct = { ...this.products[indexProduct] }
+    updatedProduct = updateProduct
+    this.products[indexProduct] = updatedProduct
+    this.toggleModal()
+  }
+
   toggleAlert() {
     this.isAlertOpen = !this.isAlertOpen
+  }
+
+  openModalEdit(id: number | undefined) {
+    if (id) {
+      this.idProduct = id
+      this.toggleModal()
+    }
+  }
+
+  openModalCreate() {
+    this.idProduct = null
+    this.toggleModal()
   }
 
   openAlert(idProduct: number) {

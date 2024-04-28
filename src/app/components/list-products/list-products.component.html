@@ -1,13 +1,25 @@
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center my-5v relative min-h-screen">
   @if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
-    <div (click)="openModal()" class="mx-auto mt-5 w-56 h-10 bg-slate-700 rounded-md text-white flex items-center justify-center cursor-pointer">Agregar Nuevo Producto</div>
+    <div (click)="openModalCreate()" class="mx-auto mt-5 w-56 h-10 bg-slate-700 rounded-md text-white flex items-center justify-center cursor-pointer">Agregar Nuevo Producto</div>
   }
 
   @for (product of products; track $index) {
-    <app-card-product
-      [infoProduct]="product"
-      (deleteProductEvent)="openAlert($event)"
-    />
+    <div class="border-2 border-slate-600 rounded shadow p-4 max-w-sm">
+      <h2>{{product.name}}</h2>
+      <p>{{product.description}}</p>
+      <p>{{product.price}}</p>
+
+      @if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
+      <div class="flex justify-end gap-2 ">
+        <div  (click)="openModalEdit(product.id)"  class="cursor-pointer">
+          <img class="w-6" src="/assets/icons/edit.png" alt="edit">
+        </div>
+        <div (click)="deleteProduct()" class="cursor-pointer">
+          <img class="w-6" src="/assets/icons/delete.png" alt="delete">
+        </div>
+      </div>
+      }
+    </div>
   }
 
   @if(isAlertOpen){
@@ -29,7 +41,7 @@
 
   @if(modalOpen){
     <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col justify-center items-center">
-      <app-manage-product [isOpenModal]="modalOpen" (closeModalEvent)="closeModal()" (addProductEvent)="addProduct($event)"/>
+      <app-manage-product [isOpenModal]="modalOpen" [idProduct]="idProduct"  (closeModalEvent)="toggleModal()" (addProductEvent)="addProduct($event)" (updateProductEvent)="updateProduct($event)" />
     </div>
   }
 
