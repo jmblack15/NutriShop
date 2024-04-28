@@ -1,1 +1,36 @@
-<p>manage-product works!</p>
+<form class="container
+w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
+ border-2 rounded-md border-gray-500 justify-around bg-slate-200
+ shadow-lg p-5 relative" [formGroup]="productForm" (ngSubmit)="addProduct()">
+ <button (click)="closeModal()" type="button" class="bg-red-700 text-white absolute w-7 h-7 rounded-full top-0 right-0">X</button>
+  <div class="flex flex-col justify-center items-center gap-2">
+    <label for="name">Nombre</label>
+    <input formControlName="name" class="h-10 border-solid border-2 rounded-md px-3 border-gray-500" type="text" name="name" id="name">
+    @if(productForm.controls['name'].errors?.['required'] && (productForm.controls['name'].touched || productForm.controls['name'].dirty)){
+      <span class="text-rose-700">Este campo es requerido</span>
+    }
+  </div>
+  <div class="flex flex-col justify-center items-center gap-2">
+    <label for="description">Descripción</label>
+    <input formControlName="description" class="h-10 border-solid border-2 rounded-md px-3 border-gray-500" type="text" name="description" id="description">
+    @if(productForm.controls['description'].errors?.['required'] && (productForm.controls['description'].touched || productForm.controls['description'].dirty)){
+      <span class="text-rose-700">Este campo es requerido</span>
+    }
+  </div>
+  <div class="flex flex-col justify-center items-center gap-2">
+    <label for="price">Precio unitario</label>
+    <input formControlName="price" class="h-10 border-solid border-2 rounded-md px-3 border-gray-500" type="number" name="price" id="price">
+    @if(productForm.controls['price'].errors?.['required'] && (productForm.controls['price'].touched || productForm.controls['price'].dirty)){
+      <span class="text-rose-700">Este campo es requerido</span>
+    }
+  </div>
+  <div class="flex flex-col justify-center items-center gap-2">
+    <label for="cuantity">Cantidad en inventario</label>
+    <input formControlName="amount" class="h-10 border-solid border-2 rounded-md px-3 border-gray-500" type="number" name="cuantity" id="cuantity">
+    @if(productForm.controls['amount'].errors?.['required'] && (productForm.controls['amount'].touched || productForm.controls['amount'].dirty)){
+      <span class="text-rose-700">Este campo es requerido</span>
+    }
+  </div>
+
+  <button class="w-10/12 h-8 bg-slate-700 rounded-md text-white mt-5" type="submit">Subir</button>
+</form>

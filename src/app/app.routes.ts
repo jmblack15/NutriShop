@@ -8,9 +8,4 @@ export const routes: Routes = [
     component: ListProductsComponent,
     title: 'Home page',
   },
-  {
-    path: 'adminProduct',
-    component: ManageProductComponent,
-    title: 'Administrador de producto',
-  },
 ];
