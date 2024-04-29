@@ -1,12 +1,8 @@
+<main class="min-h-screen min-w-screen bg-slate-200">
+  @if(isLogin || tokenLongin === 'vhlBGDIa3sWDT0xtXF' || tokenLongin === 'ZskyGa6GGpwaLUb73y'){
+    <app-home/>
+  } @else {
+    <app-login (loginChanged)="onLoginChanged($event)"/>
+  }
 
-<main class="main">
-  <div class="">
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  </div>
 </main>
-
-
-
-<router-outlet />
