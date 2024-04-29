@@ -7,7 +7,7 @@ export class CookiesService {
 
   constructor() { }
 
-  set(name: string, value: string, expirationDays: number = 31, path: string = '/') {
+  setCookie(name: string, value: string, expirationDays: number = 31, path: string = '/') {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + expirationDays);
 
@@ -15,7 +15,7 @@ export class CookiesService {
     document.cookie = cookie;
   }
 
-  get(cookieName: string): string | null {
+  getCookie(cookieName: string): string | null {
     const cookies = document.cookie.split(';')
 
     for (const cookie of cookies) {

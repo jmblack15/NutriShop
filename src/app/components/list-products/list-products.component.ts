@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ManageProductComponent } from '../manage-product/manage-product.component';
 import { ProductInterface } from '../../models/product.model'
 import { CookiesService } from '../../Services/cookies.service';
+import { LocalStorageService } from '../../Services/local-storage.service';
 import { RouterModule } from '@angular/router';
 
 
@@ -19,36 +20,18 @@ export class ListProductsComponent {
   isAlertOpen: boolean = false
   tokenLongin: string | null = null
   idProduct: number | null = null
+  products: ProductInterface[] = []
 
-  constructor(private cookieService: CookiesService) { }
+  constructor(
+    private cookieService: CookiesService,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
-    this.tokenLongin = this.cookieService.get('tokenLogin')
+    this.products = this.localStorageService.getProducts('products')
+    this.tokenLongin = this.cookieService.getCookie('tokenLogin')
   }
 
-  products: ProductInterface[] = [
-    {
-      id: 1,
-      name: "Producto 1",
-      description: "Descripción del producto 1",
-      price: 10.99,
-      amount: 10
-    },
-    {
-      id: 2,
-      name: "Producto 2",
-      description: "Descripción del producto 2",
-      price: 20.50,
-      amount: 20
-    },
-    {
-      id: 3,
-      name: "Producto 3",
-      description: "Descripción del producto 2",
-      price: 20.50,
-      amount: 10
-    },
-  ]
 
   toggleModal() {
     this.modalOpen = !this.modalOpen
@@ -61,21 +44,23 @@ export class ListProductsComponent {
       ...newProduct
     }
     this.products.push(formatedObject);
+    this.localStorageService.setProducts('products', this.products)
     this.toggleModal()
   }
 
   deleteProduct() {
     const indexProduct = this.products.findIndex(product => product.id === this.idProduct)
     this.products.splice(indexProduct, 1)
+    this.localStorageService.setProducts('products', this.products)
     this.toggleAlert()
   }
 
   updateProduct(updateProduct: ProductInterface) {
-
     const indexProduct = this.products.findIndex(product => product.id == this.idProduct)
     let updatedProduct = { ...this.products[indexProduct] }
     updatedProduct = updateProduct
     this.products[indexProduct] = updatedProduct
+    this.localStorageService.setProducts('products', this.products)
     this.toggleModal()
   }
 

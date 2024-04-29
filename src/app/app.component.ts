@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(private cookieService: CookiesService) { }
 
   ngOnInit(): void {
-    this.tokenLongin = this.cookieService.get('tokenLogin')
+    this.tokenLongin = this.cookieService.getCookie('tokenLogin')
   }
 
   onLoginChanged(isLogin: boolean) {
