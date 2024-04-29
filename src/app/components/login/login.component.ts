@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CookiesService } from '../Services/cookies.service';
+import { CookiesService } from '../../Services/cookies.service';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -46,10 +46,10 @@ export class LoginComponent {
   handleSubmitLogin() {
 
     if (this.infoInput.value.email === this.adminInfo.email && this.infoInput.value.password === this.adminInfo.password) {
-      this.cookieService.set('tokenLogin', 'vhlBGDIa3sWDT0xtXF')
+      this.cookieService.setCookie('tokenLogin', 'vhlBGDIa3sWDT0xtXF')
       this.loginChanged.emit(true)
     } else if (this.infoInput.value.email === this.userInfo.email && this.infoInput.value.password === this.userInfo.password) {
-      this.cookieService.set('tokenLogin', 'ZskyGa6GGpwaLUb73y')
+      this.cookieService.setCookie('tokenLogin', 'ZskyGa6GGpwaLUb73y')
       this.loginChanged.emit(true)
     } else {
       this.toggleErrorLogin()

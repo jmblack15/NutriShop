@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { CookiesService } from './Services/cookies.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent],
+  imports: [LoginComponent, HomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(private cookieService: CookiesService) { }
 
   ngOnInit(): void {
-    this.tokenLongin = this.cookieService.get('tokenLogin')
+    this.tokenLongin = this.cookieService.getCookie('tokenLogin')
   }
 
   onLoginChanged(isLogin: boolean) {

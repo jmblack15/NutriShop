@@ -1,11 +1,8 @@
 <main class="min-h-screen min-w-screen bg-slate-200">
-  @if(isLogin || tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
-    <p>aqui va un para el admin</p>
-  } @else if(isLogin || tokenLongin === 'ZskyGa6GGpwaLUb73y') {
-    <p>aqui va un para el user</p>
+  @if(isLogin || tokenLongin === 'vhlBGDIa3sWDT0xtXF' || tokenLongin === 'ZskyGa6GGpwaLUb73y'){
+    <app-home/>
   } @else {
     <app-login (loginChanged)="onLoginChanged($event)"/>
   }
 
 </main>
-<router-outlet />
