@@ -14,13 +14,15 @@ Web application for an online food store
 ## How to use
 
 To test the application, simply go to this [Link](https://nutri-shop.vercel.app/)
--If you want to start as an administrator, log in with these credentials
-email: admin@nutriShop.com
-password: 4dminNutrisop*
 
--If you want to start as an normal user, log in with these credentials
-email: user@test.com
-password: us3r1234
+> If you want to start as an **administrator**, log in with these credentials
+**email**: admin@nutriShop.com
+**password**: 4dminNutrisop*
+
+
+>If you want to start as an **normal user**, log in with these credentials
+**email**: user@test.com
+**password**: us3r1234
 
 
 ## Screenshot
