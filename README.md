@@ -1,27 +1,46 @@
 # NutriShop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Web application for an online food store
 
-## Development server
+## Table of contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Screenshot](#screenshot)
+- [How to use](#How-to-use)
+- [Links](#links)
+- [Built with](#built-with)
+- [Author](#author)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to use
 
-## Build
+To test the application, simply go to this [Link](https://nutri-shop.vercel.app/)
+-If you want to start as an administrator, log in with these credentials
+email: admin@nutriShop.com
+password: 4dminNutrisop*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-If you want to start as an normal user, log in with these credentials
+email: user@test.com
+password: us3r1234
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Screenshot
 
-## Running end-to-end tests
+![fireShot](https://i.ibb.co/d4ZTCBK/Screenshot-2024-04-29-091135.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Links
 
-## Further help
+- Solution URL: [Code](https://github.com/jmblack15/NutriShop)
+- Live Site URL: [Live](https://nutri-shop.vercel.app/)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Built with
+
+- Semantic HTML5 markup
+- Tailwind
+- Angular 17
+- Mobile-first workflow
+- TypeScrip
+
+
+## Author
+
+- LinkedIn - [Jose Manuel Osorio](https://www.linkedin.com/in/jose-manuel-osorio/)
