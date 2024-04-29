@@ -28,7 +28,7 @@
                 <img class="w-6" src="/assets/icons/delete.png" alt="delete">
               </div>
             }
-            <div class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">
+            <div (click)="openModalAddCart(product)" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">
               Agregar al carrito
             </div>
             </div>
@@ -49,6 +49,22 @@
             <div (click)="deleteProduct()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Eliminar</div>
             <div (click)="toggleAlert()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Cancelar</div>
           </div>
+        </div>
+      </div>
+    }
+
+    @if(isModalToAddCart){
+      <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col   items-center">
+        <div class="container
+        w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
+         border-2 rounded-md border-gray-500 justify-around bg-slate-200
+         shadow-lg p-5 mt-10" >
+         <h2>{{ productToAddCart.name }}</h2>
+         <p>Precio: {{ productToAddCart.price }}</p>
+
+         <label for="cantidad">Cantidad:</label>
+         <input type="number" id="cantidad" name="cantidad" [(ngModel)]="amountToAddCart" min="1" step="1">
+         <div class="p-3 bg-slate-700 rounded-md text-white cursor-pointer hover:bg-blue-600" (click)="addProductCart(productToAddCart)">Agregar al carrito</div>
         </div>
       </div>
     }

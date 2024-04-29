@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { CookiesService } from './Services/cookies.service';
+import { CookiesService } from './services/cookies.service';
 
 @Component({
   selector: 'app-root',
