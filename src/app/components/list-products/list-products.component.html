@@ -1,48 +1,62 @@
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center my-5v relative min-h-screen">
+<section class="">
   @if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
-    <div (click)="openModalCreate()" class="mx-auto mt-5 w-56 h-10 bg-slate-700 rounded-md text-white flex items-center justify-center cursor-pointer">Agregar Nuevo Producto</div>
+    <div (click)="openModalCreate()" class="mx-auto mt-5 w-56 h-10 bg-slate-700 rounded-md text-white flex items-center justify-center cursor-pointer absolute left-1.5 z-10">Agregar Nuevo Producto</div>
   }
 
-  @for (product of products; track $index) {
-    <div class="border-2 border-slate-600 rounded shadow p-4 max-w-sm">
-      <h2>{{product.name}}</h2>
-      <p>{{product.description}}</p>
-      <p>{{product.price}}</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center my-5v relative min-h-screen pt-20 justify-items-center">
+    @for (product of products; track $index) {
+      <div class="border-2 border-slate-600 rounded shadow h-fit w-80 bg-slate-500	">
+        <img class="w-full" src="/assets/images/deafualtImage.png" alt="product image">
 
-      @if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
-      <div class="flex justify-end gap-2 ">
-        <div  (click)="openModalEdit(product.id)"  class="cursor-pointer">
-          <img class="w-6" src="/assets/icons/edit.png" alt="edit">
+        <div class="p-2">
+            <h2 class="text-white font-extrabold text-lg text-center">{{product.name.toUpperCase()}}</h2>
+          <div>
+            <p class="text-white font-semibold">Descripción : </p>
+            <p >{{product.description}}</p>
+          </div>
+          <div>
+            <p class="text-white font-semibold">Precio unitario : </p>
+            <p>{{product.price | currency: 'USD': 'symbol':'1.0'}}</p>
+          </div>
+
+            <div class="flex justify-end gap-2 items-center mt-2">
+              @if(tokenLongin === 'vhlBGDIa3sWDT0xtXF'){
+              <div  (click)="openModalEdit(product.id)"  class="cursor-pointer p-3 bg-slate-700 rounded-md text-white cursor-pointer">
+                <img class="w-6" src="/assets/icons/edit.png" alt="edit">
+              </div>
+              <div (click)="openAlert(product.id)" class="cursor-pointer p-3 bg-slate-700 rounded-md text-white cursor-pointer">
+                <img class="w-6" src="/assets/icons/delete.png" alt="delete">
+              </div>
+            }
+            <div class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">
+              Agregar al carrito
+            </div>
+            </div>
+          </div>
         </div>
-        <div (click)="deleteProduct()" class="cursor-pointer">
-          <img class="w-6" src="/assets/icons/delete.png" alt="delete">
+    }
+
+    @if(isAlertOpen){
+      <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col   items-center">
+        <div class="container
+        w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
+         border-2 rounded-md border-gray-500 justify-around bg-slate-200
+         shadow-lg p-5 mt-10" >
+          <img class="w-10" src="/assets/icons/warning.png" alt="warming">
+          <h3 class="text-lg font-semibold	">¿está seguro?</h3>
+          <p class="text-center">Una vez eliminado, no podrás recuperar este elemento.</p>
+          <div class="flex gap-5 mt-5">
+            <div (click)="deleteProduct()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Eliminar</div>
+            <div (click)="toggleAlert()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Cancelar</div>
+          </div>
         </div>
       </div>
-      }
-    </div>
-  }
+    }
 
-  @if(isAlertOpen){
-    <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col justify-center items-center">
-      <div class="container
-      w-80 mx-auto px-4 flex flex-col gap-y-2 items-center border-solid
-       border-2 rounded-md border-gray-500 justify-around bg-slate-200
-       shadow-lg p-5">
-        <img class="w-10" src="/assets/icons/warning.png" alt="warming">
-        <h3 class="text-lg font-semibold	">¿está seguro?</h3>
-        <p class="text-center">Una vez eliminado, no podrás recuperar este elemento.</p>
-        <div class="flex gap-5 mt-5">
-          <div (click)="deleteProduct()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Eliminar</div>
-          <div (click)="toggleAlert()" class="p-3 bg-slate-700 rounded-md text-white cursor-pointer">Cancelar</div>
-        </div>
+    @if(modalOpen){
+      <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col items-center">
+        <app-manage-product [isOpenModal]="modalOpen" [idProduct]="idProduct"  (closeModalEvent)="toggleModal()" (addProductEvent)="addProduct($event)" (updateProductEvent)="updateProduct($event)" />
       </div>
-    </div>
-  }
-
-  @if(modalOpen){
-    <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col justify-center items-center">
-      <app-manage-product [isOpenModal]="modalOpen" [idProduct]="idProduct"  (closeModalEvent)="toggleModal()" (addProductEvent)="addProduct($event)" (updateProductEvent)="updateProduct($event)" />
-    </div>
-  }
-
+    }
+  </div>
 </section>

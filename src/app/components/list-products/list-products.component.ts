@@ -4,13 +4,14 @@ import { ProductInterface } from '../../models/product.model'
 import { CookiesService } from '../../Services/cookies.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { RouterModule } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [RouterModule, ManageProductComponent],
+  imports: [RouterModule, ManageProductComponent, CurrencyPipe],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
@@ -51,6 +52,7 @@ export class ListProductsComponent {
   deleteProduct() {
     const indexProduct = this.products.findIndex(product => product.id === this.idProduct)
     this.products.splice(indexProduct, 1)
+    console.log(this.products)
     this.localStorageService.setProducts('products', this.products)
     this.toggleAlert()
   }
@@ -70,19 +72,33 @@ export class ListProductsComponent {
 
   openModalEdit(id: number | undefined) {
     if (id) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
       this.idProduct = id
       this.toggleModal()
     }
   }
 
   openModalCreate() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Esto hace que el desplazamiento sea suave
+    })
     this.idProduct = null
     this.toggleModal()
   }
 
-  openAlert(idProduct: number) {
-    this.idProduct = idProduct
-    this.toggleAlert()
+  openAlert(id: number | undefined) {
+    if (id) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Esto hace que el desplazamiento sea suave
+      })
+      this.idProduct = id
+      this.toggleAlert()
+    }
   }
 
 }
