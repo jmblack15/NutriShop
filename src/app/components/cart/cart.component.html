@@ -1,0 +1,55 @@
+<section class="p-4 relative">
+  <div class=" shadow-md rounded-md p-4 max-w-xl	mx-auto" >
+    <h2 class="text-lg font-semibold mb-4">Carrito de compras</h2>
+    @if (cartService.products.length > 0) {
+      <div>
+        <ul >
+          @for (product of cartService.products; track $index) {
+            <li class="flex justify-between items-center border-b border-gray-200 py-2">
+
+              <div>
+                <div>
+                  <span class="text-md font-semibold my-4">Nombre: </span>
+                  <span>{{ product.name }}</span>
+                </div>
+                <div>
+                  <span class="text-md font-semibold my-4">Precio: </span>
+                  <span>{{ product.price | currency: 'USD': 'symbol':'1.0' }}</span>
+                </div>
+                <div>
+                  <span class="text-md font-semibold my-4">Cantidad: </span>
+                  <span>{{product.amount}}</span>
+                </div>
+              </div>
+              <button (click)="cartService.deleteProduct($index)" class="text-red-600 hover:text-red-700">Eliminar</button>
+
+            </li>
+          }
+        </ul>
+        <p class="text-lg font-semibold my-4">Total: {{ cartService.totalPice() | currency: 'USD': 'symbol':'1.0'}}</p>
+        <div class="flex gap-5">
+          <button  class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" (click)="cartService.cleanCart()">Vaciar carrito</button>
+          <button  class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" (click)="openModal()">Comprar</button>
+        </div>
+      </div>
+
+
+    } @else {
+      <p>El carrito está vacío</p>
+    }
+  </div>
+
+  @if(isModalConfirm){
+    <div class="absolute z-10 w-full h-full bg-[#0f172ae8] flex flex-col top-0  left-0  items-center">
+      <div class="container
+      w-80 mx-auto px-4 flex flex-col items-center border-solid
+       border-2 rounded-md border-gray-500 justify-around bg-slate-200
+       shadow-lg p-5 mt-10" >
+       <h2 class="text-lg font-semibold mb-4">Confirmación de pedido</h2>
+       <p class="text-lg font-semibold my-4">Total a pagar: {{ cartService.totalPice() | currency: 'USD': 'symbol':'1.0'}}</p>
+
+       <button  class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" (click)="completedPurchase()">Completar</button>
+      </div>
+    </div>
+  }
+</section>

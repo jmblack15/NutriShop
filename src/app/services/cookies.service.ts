@@ -28,4 +28,11 @@ export class CookiesService {
     return null
   }
 
+  deleteCookie(cookieName: string) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() - 1);
+    const cookie = `${encodeURIComponent(cookieName)}=; expires=${expirationDate.toUTCString()}; path=/`;
+    document.cookie = cookie;
+  }
+
 }

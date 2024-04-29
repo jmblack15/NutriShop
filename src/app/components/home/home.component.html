@@ -1,8 +1,20 @@
-<header class="shadow-lg border-gray-500">
+<header class="shadow-lg border-gray-500 flex justify-between">
   <a [routerLink]="['/']" class="flex gap-2 items-center p-2">
     <img src="/assets/icons/store_869636.png" alt="logo">
     <h1 class="font-extrabold text-xl">NutriShop</h1>
   </a>
+
+  <div class="flex gap-4 pr-2">
+    <a [routerLink]="['carrito']" class="flex items-center gap-2">
+      <img class="w-6" src="/assets/icons/shopping-cart.png" alt="carrito">
+      <p>{{cartCuantity}}</p>
+      <p>Carrito</p>
+    </a>
+    <div (click)="logOut()" class="flex items-center gap-2">
+      <img class="w-6" src="/assets/icons/logout.png" alt="salir">
+      <p>Salir</p>
+    </div>
+  </div>
 </header>
 <section class="flex flex-col">
   <router-outlet></router-outlet>

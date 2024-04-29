@@ -22,4 +22,7 @@ export class LocalStorageService {
     return []
   }
 
+  delectProduc(name: string) {
+    localStorage.removeItem(name);
+  }
 }

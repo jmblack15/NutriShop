@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { ManageProductComponent } from '../manage-product/manage-product.component';
 import { ProductInterface } from '../../models/product.model'
-import { CookiesService } from '../../Services/cookies.service';
-import { LocalStorageService } from '../../Services/local-storage.service';
+import { CookiesService } from '../../services/cookies.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 import { RouterModule } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../services/cart.service';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [RouterModule, ManageProductComponent, CurrencyPipe],
+  imports: [RouterModule, ManageProductComponent, CurrencyPipe, FormsModule],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
@@ -19,13 +21,23 @@ export class ListProductsComponent {
 
   modalOpen: boolean = false
   isAlertOpen: boolean = false
+  isModalToAddCart: boolean = false
   tokenLongin: string | null = null
   idProduct: number | null = null
   products: ProductInterface[] = []
+  amountToAddCart: number = 1
+  productToAddCart: ProductInterface = {
+    name: '',
+    description: '',
+    price: 0,
+    amount: 0
+  }
+
 
   constructor(
     private cookieService: CookiesService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -99,6 +111,20 @@ export class ListProductsComponent {
       this.idProduct = id
       this.toggleAlert()
     }
+  }
+
+  openModalAddCart(product: ProductInterface) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Esto hace que el desplazamiento sea suave
+    })
+    this.productToAddCart = product
+    this.isModalToAddCart = true
+  }
+
+  addProductCart(product: ProductInterface) {
+    this.cartService.addProduct(product, this.amountToAddCart)
+    this.isModalToAddCart = false
   }
 
 }
